@@ -1,0 +1,38 @@
+<aura:component controller="ProductController">
+  <aura:attribute name="items" type="Object[]"/>
+  <aura:attribute name="searchTerm" type="String" default=""/> 
+  <aura:attribute name="timer" type="Integer"/>
+  <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+  <div aria-labelledby="availableProductInfo">
+    <fieldset class="slds-box slds-theme--default slds-container--small">    
+      <legend id="availableProductInfo" class="slds-text-heading--small slds-p-vertical--medium">
+        Available Product
+      </legend>
+      <form class="slds-form--stacked">
+        <div class="slds-form-element slds-is-required">
+          <div class="slds-form-element__control">
+            <ui:inputText aura:id="searchTerm" label="Filter"
+              class="slds-input"
+              labelClass="slds-form-element__label"
+              value="{!v.searchTerm}"
+              updateOn="keyup"
+              keyup="{!c.SearchKeyChange}"/>
+            </div>
+          </div> 
+        </form>
+        <br/>
+        <aura:iteration items="{!v.items}" var="items">
+          <div class="slds-card slds-p-top--medium">
+            <div class="slds-card__header slds-grid">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-card__body slds-card__body_inner">
+                  {!items.ProductCode} - {!items.Name} 
+                </div>
+              </header>
+            </div>
+          </div>
+        </aura:iteration>
+      </fieldset>
+    </div>
+  </aura:component>
